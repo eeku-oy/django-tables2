@@ -517,7 +517,8 @@ class BoundColumn(object):
         """
         Return a set of the classes from the class key in ``attrs``.
         """
-        classes = attrs.get("class", None)
+        classes = attrs.get("class", '')
+        classes = len(classes) and (classes + ' ' + self.name) or self.name  # Always include column name in classes
         classes = set() if classes is None else set(classes.split(" "))
 
         return self._table.get_column_class_names(classes, self)
